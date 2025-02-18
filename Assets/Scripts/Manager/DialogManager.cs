@@ -26,13 +26,12 @@ public class DialogManager : MonoBehaviour
         }
     }
 
-    public TextMeshProUGUI dialogText;
-    public GameObject dialogUI;
-
+    //public TextMeshProUGUI dialogText;
+    //public GameObject dialogUI;
     [System.Serializable]
     public class DialogData
     {
-        public string dialogText;
+        public string[] dialogText;
     }
 
 
@@ -40,6 +39,8 @@ public class DialogManager : MonoBehaviour
     {
 
         uiManager = FindObjectOfType<UIManager>();
+
+
         if (instance != null && instance != this)
         {
             Destroy(gameObject);
@@ -53,21 +54,16 @@ public class DialogManager : MonoBehaviour
 
     public void DialogOut(int miniGameNumber)
     {
-        uiManager.Setdialog();
         LoadDialog(miniGameNumber);
+        //uiManager.SetMiniGame();
 
     }
     //미니게임매니저에 진행도에 따라 대사 수정
     private void LoadDialog(int miniGameNumber)
     {
-        if (dialogUI == null || dialogText == null)
-        {
-            Debug.LogError("DialogUI 또는 DialogText가 할당되지 않았습니다.");
-            return;
-        }
 
         // 미니게임 진행도 가져오기
-        int gameProgress = MinigameManager.instance.minigameProgress[miniGameNumber - 1];
+        int gameProgress = MiniGameManager.Instance.minigameProgress[miniGameNumber - 1];
 
         string fileName = "Dialog_" + miniGameNumber + ".json";
         string folderPath = Path.Combine(Application.streamingAssetsPath, "Dialogs");
@@ -80,31 +76,18 @@ public class DialogManager : MonoBehaviour
 
             if (gameProgress < dialogDataArray.Length)
             {
-                dialogText.text = dialogDataArray[gameProgress].dialogText;
+                uiManager.SetDailog("d", dialogDataArray[gameProgress].dialogText);
             }
             else
             {
-                dialogText.text = "이 미니게임은 아직 진행되지 않았습니다.";
+                uiManager.SetDailog("d",new string[] { "이 미니게임은 아직 진행되지 않았습니다." });
             }
-
-            StartCoroutine(WaitForKeyPress());
         }
         else
         {
             Debug.LogError("Dialog JSON 파일이 존재하지 않습니다: " + filePath);
         }
     }
-
-    private IEnumerator WaitForKeyPress()
-    {
-        // 아무 키나 입력할 때까지 대기
-        yield return new WaitUntil(() => Input.anyKeyDown);
-
-        // 키가 입력되면 다이얼로그 UI 비활성화
-        Debug.Log("키입력");
-        //dialogUI.SetActive(false);
-    }
-
 
 
     // JSON 데이터를 다루는 유틸리티

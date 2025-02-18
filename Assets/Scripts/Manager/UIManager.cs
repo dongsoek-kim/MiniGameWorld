@@ -14,6 +14,7 @@ public enum UIState
 
 public class UIManager : MonoBehaviour
 {
+
     HomeUI homeUI;
     CustomazingUI customazingUI;
     DialogUI dialogUI;
@@ -64,7 +65,11 @@ public class UIManager : MonoBehaviour
     //{
     //    minigameUI.UpdateWaveText(waveIndex);
     //}
-
+    public void SetDailog(string name,string[] dialog)
+    {
+        Debug.Log("SetDailog");
+        dialogUI.SetText(name, dialog);
+    }
     public void ChangeState(UIState state)
     {
         currentState = state;

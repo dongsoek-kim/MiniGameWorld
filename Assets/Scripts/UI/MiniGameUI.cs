@@ -13,14 +13,6 @@ public class MiniGameUI : BaseUI
     {
     }
 
-    public void UpdateHPSlider(float percentage)
-    {
-    }
-
-    public void UpdateWaveText(int wave)
-    {
-    }
-
     protected override UIState GetUIState()
     {
         return UIState.MiniGame;

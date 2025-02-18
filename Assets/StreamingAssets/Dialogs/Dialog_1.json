@@ -1,15 +1,15 @@
 [
     {
-        "dialogText":  "미니게임1 : 처음대화야!" 
+        "dialogText": [ "미니게임1 : 처음대화야!" ]
     },
     {
-        "dialogText": "첫스테이지 클리어 축하해"
+        "dialogText": [ "첫스테이지 클리어 축하해" ]
     },
     {
-        "dialogText": "2스테이지 클리어 축하해!"
+        "dialogText": [ "2스테이지 클리어 축하해!" ]
     },
     {
-        "dialogText": "미니게임1 : 3스테이지 클리어!"
+        "dialogText": [ "미니게임1 : 3스테이지 클리어!" ]
     },
     {
         "dialogText": [
