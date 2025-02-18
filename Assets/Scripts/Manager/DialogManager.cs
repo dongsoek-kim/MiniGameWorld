@@ -7,6 +7,7 @@ using UnityEngine;
 public class DialogManager : MonoBehaviour
 {
     private static DialogManager instance;
+    private UIManager uiManager;
     public static DialogManager Instance
     {
         get
@@ -37,6 +38,8 @@ public class DialogManager : MonoBehaviour
 
     void Awake()
     {
+
+        uiManager = FindObjectOfType<UIManager>();
         if (instance != null && instance != this)
         {
             Destroy(gameObject);
@@ -47,9 +50,15 @@ public class DialogManager : MonoBehaviour
             DontDestroyOnLoad(gameObject); // 씬 전환 시에도 이 객체를 유지
         }
     }
-    
+
+    public void DialogOut(int miniGameNumber)
+    {
+        uiManager.Setdialog();
+        LoadDialog(miniGameNumber);
+
+    }
     //미니게임매니저에 진행도에 따라 대사 수정
-    public void Dialog(int miniGameNumber)
+    private void LoadDialog(int miniGameNumber)
     {
         if (dialogUI == null || dialogText == null)
         {
@@ -60,17 +69,15 @@ public class DialogManager : MonoBehaviour
         // 미니게임 진행도 가져오기
         int gameProgress = MinigameManager.instance.minigameProgress[miniGameNumber - 1];
 
-        // JSON에서 다이얼로그 데이터를 가져옵니다.
         string fileName = "Dialog_" + miniGameNumber + ".json";
-        string folderPath = Path.Combine(Application.streamingAssetsPath, "Dialogs"); // Dialog 폴더
-        string filePath = Path.Combine(folderPath, fileName); // 폴더와 파일명 결합
+        string folderPath = Path.Combine(Application.streamingAssetsPath, "Dialogs");
+        string filePath = Path.Combine(folderPath, fileName); 
 
         if (File.Exists(filePath))
         {
             string jsonData = File.ReadAllText(filePath);
             DialogData[] dialogDataArray = JsonHelper.FromJson<DialogData>(jsonData);
 
-            // 게임 진행도에 따라 다이얼로그 설정
             if (gameProgress < dialogDataArray.Length)
             {
                 dialogText.text = dialogDataArray[gameProgress].dialogText;
@@ -80,7 +87,6 @@ public class DialogManager : MonoBehaviour
                 dialogText.text = "이 미니게임은 아직 진행되지 않았습니다.";
             }
 
-            dialogUI.SetActive(true);
             StartCoroutine(WaitForKeyPress());
         }
         else

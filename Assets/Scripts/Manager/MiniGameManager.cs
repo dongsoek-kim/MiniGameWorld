@@ -38,7 +38,7 @@ public class MinigameManager : MonoBehaviour
     private void Start()
     {
         StageClear += SetMinigameProgress;
-        minigameProgress[0] = 1;//테스트코드
+        minigameProgress[0] = 4;//테스트코드
     }
 }
 

@@ -43,6 +43,6 @@ public class NPCManager : MonoBehaviour
 
     public void OnIntercate()
     {
-        DialogManager.Instance.Dialog(1);
+        DialogManager.Instance.DialogOut(1);
     }
 }
