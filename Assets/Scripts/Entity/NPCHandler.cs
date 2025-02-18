@@ -34,7 +34,7 @@ public class NPCHandler : MonoBehaviour
                 Debug.Log("반응!");
 
                 // NPC에 맞는 동작을 수행
-                NPCManager.Instance.OnIntercate();
+                NPCManager.Instance.OnInteract(npc.name);
             }
         }
     }

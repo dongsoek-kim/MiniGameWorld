@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEditor.Rendering;
 using UnityEngine;
+using UnityEngine.Rendering.LookDev;
 using UnityEngine.UI;
 public class NPCManager : MonoBehaviour
 {
@@ -41,8 +42,17 @@ public class NPCManager : MonoBehaviour
     {
     }
 
-    public void OnIntercate()
+    public void OnInteract(string npcname)
     {
-        GameManager.Instance.DialogOut(1);
+        if (instance != null)
+        {
+            Debug.Log("NPC와 대화를 시작합니다.");
+        }
+        else
+        {
+            Debug.Log("NPCManager가 없습니다.");
+        }
+    
+        GameManager.Instance.OnInteract(npcname);
     }
 }

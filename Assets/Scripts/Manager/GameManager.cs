@@ -6,6 +6,8 @@ public class GameManager : MonoBehaviour
 {
     private static GameManager instance;
     private UIManager uiManager;
+    private DialogManager dialogManager;
+    private MiniGameManager miniGameManager;   
     public static GameManager Instance
     {
         get
@@ -26,8 +28,10 @@ public class GameManager : MonoBehaviour
     }
     void Awake()
     {
-
+        
         uiManager = FindObjectOfType<UIManager>();
+        dialogManager = FindObjectOfType<DialogManager>();
+        miniGameManager = FindObjectOfType<MiniGameManager>();
         if (instance != null && instance != this)
         {
             Destroy(gameObject);
@@ -38,13 +42,39 @@ public class GameManager : MonoBehaviour
             DontDestroyOnLoad(gameObject); // 씬 전환 시에도 이 객체를 유지
         }
     }
+    public void OnInteract(string npcName)
+    {
+        switch(npcName)
+        {
+            case " Village Chief":
+                Debug.Log("마을장과 대화를 시작합니다.");
+                break;
+            case "MiniGame1 NPC":
+                Debug.Log("미니게임1 NPC와 대화를 시작합니다.");
+                break;
+            case "MiniGame2 NPC":
+                Debug.Log("미니게임2 NPC와 대화를 시작합니다.");
+                break;
+            case "MiniGame3 NPC":
+                Debug.Log("미니게임3 NPC와 대화를 시작합니다.");
+                break;
+            case "MiniGame4 NPC":
+                Debug.Log("미니게임4 NPC와 대화를 시작합니다.");
+                break;
+        }
+    }
     public void DialogOut(int miniGameNumber )
     {
         uiManager.Setdialog();
-        DialogManager.Instance.DialogOut(miniGameNumber);        
+        dialogManager.DialogOut(miniGameNumber);        
     }
     public void MiniGameStart()
     {
         uiManager.SetMiniGame();
+    }
+
+    public void OpenShop()
+    {
+        uiManager.SetShop();
     }
 }   
