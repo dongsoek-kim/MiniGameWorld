@@ -60612,7 +60612,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: text
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 13366112757d18e4aaf648e082789249, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -60676,7 +60676,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
+  m_hasFontAssetChanged: 1
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &8874285
@@ -63034,6 +63034,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 95359377}
+  - component: {fileID: 95359378}
   m_Layer: 0
   m_Name: NPC
   m_TagString: Untagged
@@ -63061,6 +63062,18 @@ Transform:
   - {fileID: 1280523270}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &95359378
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 95359376}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6d1b94df872f1b4c886e6236bbffd22, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &136237044
 GameObject:
   m_ObjectHideFlags: 0
@@ -89755,6 +89768,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 583698441}
+  - component: {fileID: 583698442}
   m_Layer: 0
   m_Name: MiniGame
   m_TagString: Untagged
@@ -89781,6 +89795,19 @@ Transform:
   - {fileID: 1076741936}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &583698442
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 583698440}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43a8820d52027e947b23ef58ff67ca2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minigameProgress: 0000000000000000000000000000000000000000
 --- !u!1 &619087951
 GameObject:
   m_ObjectHideFlags: 0
@@ -91139,7 +91166,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d63679a34dee5e44a652e3ee5841054, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactionRadius: 0.5
+  interactionRadius: 1.5
   npcTag: NPC
 --- !u!1 &1293106533
 GameObject:
@@ -112513,6 +112540,52 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1742330718
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1742330720}
+  - component: {fileID: 1742330719}
+  m_Layer: 0
+  m_Name: DialogManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1742330719
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1742330718}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fddce20073c35664d98be912f8f11723, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogText: {fileID: 8874284}
+  dialogUI: {fileID: 301772031}
+--- !u!4 &1742330720
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1742330718}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1759755083
 GameObject:
   m_ObjectHideFlags: 0
@@ -136136,7 +136209,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d63679a34dee5e44a652e3ee5841054, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactionRadius: 0.5
+  interactionRadius: 1.5
   npcTag: NPC
 --- !u!212 &5045808451840616648
 SpriteRenderer:
@@ -137223,7 +137296,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d63679a34dee5e44a652e3ee5841054, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactionRadius: 0.5
+  interactionRadius: 1.5
   npcTag: NPC
 --- !u!212 &5571740172851657691
 SpriteRenderer:
@@ -143545,7 +143618,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d63679a34dee5e44a652e3ee5841054, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactionRadius: 0.5
+  interactionRadius: 1.5
   npcTag: NPC
 --- !u!1 &7299242009042432131
 GameObject:
@@ -143891,7 +143964,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d63679a34dee5e44a652e3ee5841054, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactionRadius: 0.5
+  interactionRadius: 1.5
   npcTag: NPC
 --- !u!1 &7566915810205991984
 GameObject:
@@ -147405,3 +147478,4 @@ SceneRoots:
   - {fileID: 95359377}
   - {fileID: 583698441}
   - {fileID: 2109666519}
+  - {fileID: 1742330720}

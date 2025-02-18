@@ -8,7 +8,6 @@ public class NPCHandler : MonoBehaviour
 
     void Start()
     {
-        // 플레이어 객체를 찾아서 저장
         player = GameObject.FindGameObjectWithTag("Player");
         if (player == null)
         {
@@ -18,14 +17,12 @@ public class NPCHandler : MonoBehaviour
 
     void Update()
     {
-        // 플레이어와 NPC 사이의 거리를 계산
         float distance = Vector3.Distance(player.transform.position, transform.position);
-
-        // 반경 내에 플레이어가 있고 스페이스바를 누르면 상호작용
         if (distance <= interactionRadius && Input.GetKeyDown(KeyCode.Space))
         {
             Debug.Log(this.name);
             Debug.Log("반응!");
+            NPCManager.Instance.OnIntercate();
         }
     }
 }
