@@ -67,8 +67,21 @@ namespace Stack
         {
             if (isGameOver)
                 return;
-
-            if (Input.GetMouseButtonDown(0))
+            if (isClear)
+            {
+                if (clearCooldown <= 0)
+                {
+                    if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
+                    {
+                        SceneManager.LoadScene("MainScene");
+                    }
+                }
+                else
+                {
+                    clearCooldown -= Time.deltaTime;
+                }
+            }            
+            else if (Input.GetMouseButtonDown(0))
             {
 
                 if (PlaceBlock())
@@ -76,20 +89,7 @@ namespace Stack
                     Spawn_Block();
                     uiManager.UpdateScore(stackCount - 1);
                     IsClear();
-                    if (isClear)
-                    {
-                        if (clearCooldown <= 0)
-                        {
-                            if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
-                            {
-                                SceneManager.LoadScene("MainScene");
-                            }
-                        }
-                        else
-                        {
-                            clearCooldown -= Time.deltaTime;
-                        }
-                    }
+          
                 }
                 else
                 {
@@ -181,7 +181,7 @@ namespace Stack
 
         void MoveBlock()
         {
-            blockTransition += (Time.deltaTime * BlockMovingSpeed)+difficulty;
+            blockTransition += ((Time.deltaTime * BlockMovingSpeed)+(difficulty*0.01f));
 
             float movePosition = Mathf.PingPong(blockTransition, BoundSize) - BoundSize/2;
 
@@ -279,7 +279,7 @@ namespace Stack
                             Debug.Log("클리어");
                             isClear = true;
                             GameClear?.Invoke();
-                            MiniGameManager.Instance.StageClear?.Invoke(2, 1);//결합도 문제
+                            MiniGameManager.Instance.StageClear?.Invoke(0, 1);//결합도 문제
                         }
                         break;
                     case 1://normal
@@ -288,7 +288,7 @@ namespace Stack
                             Debug.Log("클리어");
                             isClear = true;
                             GameClear?.Invoke();
-                            MiniGameManager.Instance.StageClear?.Invoke(2, 2);//결합도 문제
+                            MiniGameManager.Instance.StageClear?.Invoke(0, 2);//결합도 문제
                         }
                         break;
                     case 2://hard
@@ -298,7 +298,7 @@ namespace Stack
                             Debug.Log("클리어");
                             isClear = true;
                             GameClear?.Invoke();
-                            MiniGameManager.Instance.StageClear?.Invoke(2, 3);//결합도 문제
+                            MiniGameManager.Instance.StageClear?.Invoke(0, 3);//결합도 문제
                         }
                         break;
                     case 3://challenge
@@ -308,7 +308,7 @@ namespace Stack
                             Debug.Log("클리어");
                             isClear = true;
                             GameClear?.Invoke();
-                            MiniGameManager.Instance.StageClear?.Invoke(2, 4);//결합도 문제
+                            MiniGameManager.Instance.StageClear?.Invoke(0, 4);//결합도 문제
                         }
                         break;
                     default:
