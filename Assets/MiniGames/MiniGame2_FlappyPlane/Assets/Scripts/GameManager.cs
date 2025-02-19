@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,7 +11,7 @@ namespace FlappyPlane
         static GameManager gameManager;
         public static GameManager Instance { get { return gameManager; } }
         private static int difficulty;
-
+        public Action GameClear;
         // 게임 난이도 설정
         public static void SetGameDifficulty(int newDifficulty)
         {
@@ -21,6 +22,7 @@ namespace FlappyPlane
         public UIManager UIManager { get { return uiManager; } }
         public void Awake()
         {
+            GameClear += ONGameClear;
             gameManager = this;
             uiManager = FindObjectOfType<UIManager>();
         }
@@ -28,16 +30,23 @@ namespace FlappyPlane
         {
             uiManager.UpdateScore(0);
         }
-        public void GameOver()
+        private void Update()
         {
             IsClear();
-            uiManager.SetRestart();
+        }
+        public void GameOver()
+        {
+            uiManager.SetGameOver();
         }
         public void RestartGame()
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
 
+        public void ONGameClear()
+        {
+            uiManager.SetGameClear();
+        }
         public void AddScore(int score)
         {
             currentScore += score;
@@ -51,6 +60,7 @@ namespace FlappyPlane
                     if (currentScore >= 3)
                     {
                         Debug.Log("클리어");
+                        GameClear?.Invoke();
                         MiniGameManager.Instance.StageClear?.Invoke(1, 1);//결합도 문제
                     }
                     break;

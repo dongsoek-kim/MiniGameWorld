@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.IO;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class DialogManager : MonoBehaviour
 {
     private static DialogManager instance;
-    private UIManager uiManager;
+    [SerializeField] private UIManager uiManager;
     public static DialogManager Instance
     {
         get
@@ -103,6 +104,25 @@ public class DialogManager : MonoBehaviour
         private class Wrapper<T>
         {
             public T[] items;
+        }
+    }
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;  // 씬 로드 후 이벤트 제거
+    }
+
+    // 씬이 로드된 후 UIManager를 다시 할당
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        // 씬이 로드된 후 UIManager를 찾거나 할당
+        if (uiManager == null)
+        {
+            uiManager = FindObjectOfType<UIManager>();
         }
     }
 }

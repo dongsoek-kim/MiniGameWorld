@@ -51,7 +51,7 @@ public class MiniGameManager : MonoBehaviour
     // 예시: 특정 미니게임의 진행도를 설정
     public void StageClearHandler(int gameNumber, int progress)
     {
-        if (gameNumber >= 0 && gameNumber < minigameProgress.Length)
+        if (gameNumber >= 0 && gameNumber < minigameProgress.Length&& minigameProgress[gameNumber]<progress)
         {
             minigameProgress[gameNumber] = progress;
         }
@@ -66,8 +66,6 @@ public class MiniGameManager : MonoBehaviour
             Debug.Log($"난이도{difficulty}");
             FlappyPlane.GameManager.SetGameDifficulty(difficulty);
             SceneManager.LoadScene($"MiniGame{gameNumber+1}");
-            // 난이도 전달 (씬 간 난이도 전달)
-            //SceneManager.sceneLoaded += (scene, mode) => PassDifficultyToScene(difficulty);
         }
         else
         {
@@ -84,10 +82,6 @@ public class MiniGameManager : MonoBehaviour
         {
             return true;
         }
-    }
-    private void PassDifficultyToScene(int diffculty)
-    {   //게임 씬에 있는 GameManager에 난이도 전달
-        //namespace.GameManager.Instance.SetDifficulty(diffculty);를 이용해 전달
     }
 }
 

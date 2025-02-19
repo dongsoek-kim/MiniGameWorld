@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace FlappyPlane
 {
@@ -12,11 +14,12 @@ namespace FlappyPlane
         public float flapFroce = 6f;
         public float forwardSpeed = 3f;
         public bool isDead = false;
-        float deathCooldown = 0f;
-
+        float deathCooldown = 1f;
+        float clearCooldown = 1f;
         bool isFlap = false;
-
+        bool isClear = false;
         public bool godMode = false;
+        public int coin { get; set; }
 
         GameManager gameManager;
         // Start is called before the first frame update
@@ -30,6 +33,8 @@ namespace FlappyPlane
 
             if (_rigidbody == null)
                 Debug.LogError("Not Founded Rigidbody");
+
+            gameManager.GameClear += OnGameClear;
         }
 
         // Update is called once per frame
@@ -42,7 +47,7 @@ namespace FlappyPlane
                     //재시작
                     if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
                     {
-                        gameManager.RestartGame();
+                        SceneManager.LoadScene("MainScene");
                     }
                 }
                 else
@@ -51,6 +56,20 @@ namespace FlappyPlane
                 }
 
             }
+            else if (isClear)
+            {
+                if (clearCooldown <= 0)
+                {
+                    if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
+                    {
+                        SceneManager.LoadScene("MainScene");
+                    }
+                }
+                else
+                {
+                    clearCooldown -= Time.deltaTime;
+                } 
+            }        
             else
             {
                 if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
@@ -66,7 +85,21 @@ namespace FlappyPlane
 
             Vector3 velocity = _rigidbody.velocity;
             velocity.x = forwardSpeed;
+            if (isClear)
+            {
+                Collider2D collider = GetComponent<Collider2D>();
+                Rigidbody2D rigidbody = GetComponent<Rigidbody2D>();
+                if (collider != null)
+                {
+                    collider.enabled = false;  // Collider2D 비활성화
+                }
+                if (rigidbody != null)
+                {
+                    rigidbody.isKinematic = true;  // Rigidbody2D를 물리 엔진의 영향을 받지 않게 설정
+                }
 
+                return;
+            }
             if (isFlap)
             {
                 velocity.y += flapFroce;
@@ -87,9 +120,14 @@ namespace FlappyPlane
             if (isDead)
                 return;
             isDead = true;
-            deathCooldown = 1f;
             animator.SetInteger("IsDie", 1);
             gameManager.GameOver();
+        }
+
+        public void OnGameClear()
+        {
+            isClear = true;
+            godMode = true;
         }
     }
 }

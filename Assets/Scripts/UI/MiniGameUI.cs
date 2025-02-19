@@ -59,6 +59,7 @@ public class MiniGameUI : BaseUI
         hardButton.onClick.AddListener(() => OnButtonClicked(gameNumber, 2));
         challengeButton.onClick.AddListener(() => OnButtonClicked(gameNumber, 3));
     }
+
     // 버튼 클릭 시 GameNumber와 난이도 전달
     private void OnButtonClicked(int gameNumber, int difficulty)
     {

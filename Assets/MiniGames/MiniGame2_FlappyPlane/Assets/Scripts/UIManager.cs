@@ -8,18 +8,24 @@ namespace FlappyPlane
     public class UIManager : MonoBehaviour
     {
         public TextMeshProUGUI scoreText;
-        public TextMeshProUGUI restartText;
+        public TextMeshProUGUI Text;
         // Start is called before the first frame update
         void Start()
         {
-            if (restartText == null)
+            if (Text == null)
                 if (scoreText == null)
-                    restartText.gameObject.SetActive(false);
+                    Text.gameObject.SetActive(false);
         }
 
-        public void SetRestart()
+        public void SetGameOver()
         {
-            restartText.gameObject.SetActive(true);
+            Text.text ="Game Over";
+            Text.gameObject.SetActive(true);
+        }
+        public void SetGameClear()
+        {
+            Text.text = "Game Clear";
+            Text.gameObject.SetActive(true);
         }
         public void UpdateScore(int score)
         {

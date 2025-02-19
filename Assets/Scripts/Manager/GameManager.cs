@@ -2,14 +2,15 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     private static GameManager instance;
-    private UIManager uiManager;
+    [SerializeField] private UIManager uiManager;
     private DialogManager dialogManager;
     private MiniGameManager miniGameManager;
-    private NPCManager npcManager;
+    [SerializeField] private NPCManager npcManager;
 
     public Action<int> DialogFinished;
 
@@ -33,8 +34,10 @@ public class GameManager : MonoBehaviour
     }
     void Awake()
     {
-        
-        uiManager = FindObjectOfType<UIManager>();
+        if (uiManager == null)
+        {
+            uiManager = FindObjectOfType<UIManager>();  // UIManager를 씬에서 찾음
+        }
         dialogManager = FindObjectOfType<DialogManager>();
         miniGameManager = FindObjectOfType<MiniGameManager>();
         npcManager = FindObjectOfType<NPCManager>();
@@ -55,7 +58,7 @@ public class GameManager : MonoBehaviour
     }
     public void OnInteract(string npcName)
     {
-        switch(npcName)
+        switch (npcName)
         {
             case " Village Chief":
                 Debug.Log("마을장과 대화를 시작합니다.");
@@ -82,23 +85,23 @@ public class GameManager : MonoBehaviour
                 break;
         }
     }
-    public void DialogOut(int miniGameNumber )
+    public void DialogOut(int miniGameNumber)
     {
         uiManager.Setdialog();
-        dialogManager.DialogOut(miniGameNumber);        
+        dialogManager.DialogOut(miniGameNumber);
     }
     private void DialogFinishedHandler(int gameNumber)
     {
         Debug.Log($"게임 {gameNumber} 미니게임 시작!");
         MiniGameStart(npcManager.npcName[gameNumber]);
-        
+
     }
 
     public void MiniGameStart(string name)
     {
         uiManager.SetMiniGame(name);
     }
-    
+
     public void ExitMiniGame()
     {
         uiManager.SetHome();
@@ -108,4 +111,23 @@ public class GameManager : MonoBehaviour
     {
         uiManager.SetShop();
     }
-}   
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;  // 씬 로드 후 이벤트 제거
+    }
+
+    // 씬이 로드된 후 UIManager를 다시 할당
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        // 씬이 로드된 후 UIManager를 찾거나 할당
+        if (uiManager == null)
+        {
+            uiManager = FindObjectOfType<UIManager>();
+        }
+    }
+}

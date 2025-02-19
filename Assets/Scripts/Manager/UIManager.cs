@@ -15,16 +15,17 @@ public enum UIState
 public class UIManager : MonoBehaviour
 {
 
-    HomeUI homeUI;
-    CustomazingUI customazingUI;
-    DialogUI dialogUI;
-    MiniGameUI miniGameUI;
-    ShopUI shopUI;
+    [SerializeField]HomeUI homeUI;
+    [SerializeField] CustomazingUI customazingUI;
+    [SerializeField] DialogUI dialogUI;
+    [SerializeField] MiniGameUI miniGameUI;
+    [SerializeField] ShopUI shopUI;
     private UIState currentState;
 
 
     private void Awake()
     {
+
         homeUI = GetComponentInChildren<HomeUI>(true);
         homeUI.Init(this);
         customazingUI = GetComponentInChildren<CustomazingUI>(true);
@@ -35,7 +36,6 @@ public class UIManager : MonoBehaviour
         miniGameUI.Init(this);
         shopUI = GetComponentInChildren<ShopUI>(true);
         shopUI.Init(this);
-
         ChangeState(UIState.Home);
     }
 
