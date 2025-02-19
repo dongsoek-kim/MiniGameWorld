@@ -51,15 +51,19 @@ public class GameManager : MonoBehaviour
                 break;
             case "MiniGame1 NPC":
                 Debug.Log("미니게임1 NPC와 대화를 시작합니다.");
+                DialogOut(1);
                 break;
             case "MiniGame2 NPC":
                 Debug.Log("미니게임2 NPC와 대화를 시작합니다.");
+                DialogOut(2);
                 break;
             case "MiniGame3 NPC":
                 Debug.Log("미니게임3 NPC와 대화를 시작합니다.");
+                DialogOut(3);
                 break;
             case "MiniGame4 NPC":
                 Debug.Log("미니게임4 NPC와 대화를 시작합니다.");
+                DialogOut(4);
                 break;
         }
     }

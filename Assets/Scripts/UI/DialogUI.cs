@@ -47,7 +47,7 @@ public class DialogUI : BaseUI
         yield return new WaitUntil(() => Input.anyKeyDown);
         nameText.text = "";
         dialogText.text = "";
+        SetActive(UIState.Home);
 
-        GameManager.Instance.MiniGameStart();
     }
 }

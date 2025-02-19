@@ -76,7 +76,7 @@ public class DialogManager : MonoBehaviour
 
             if (gameProgress < dialogDataArray.Length)
             {
-                uiManager.SetDailog("d", dialogDataArray[gameProgress].dialogText);
+                uiManager.SetDailog(NPCManager.Instance.npcName[miniGameNumber], dialogDataArray[gameProgress].dialogText);
             }
             else
             {
