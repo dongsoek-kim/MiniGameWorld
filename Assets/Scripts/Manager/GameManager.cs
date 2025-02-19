@@ -98,6 +98,11 @@ public class GameManager : MonoBehaviour
     {
         uiManager.SetMiniGame(name);
     }
+    
+    public void ExitMiniGame()
+    {
+        uiManager.SetHome();
+    }
 
     public void OpenShop()
     {

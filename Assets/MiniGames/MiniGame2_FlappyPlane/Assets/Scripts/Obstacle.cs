@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
-namespace FlappyPlame
+namespace FlappyPlane
 {
     public class Obstacle : MonoBehaviour
     {

@@ -40,7 +40,10 @@ public class UIManager : MonoBehaviour
     }
 
 
-
+    public void SetHome()
+    {
+        ChangeState(UIState.Home);
+    }
     public void SetCostomazing()
     {
         ChangeState(UIState.Customazing);

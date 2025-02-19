@@ -3,13 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace FlappyPlame
+namespace FlappyPlane
 {
     public class GameManager : MonoBehaviour
     {
         static GameManager gameManager;
         public static GameManager Instance { get { return gameManager; } }
+        private static int difficulty;
 
+        // 게임 난이도 설정
+        public static void SetGameDifficulty(int newDifficulty)
+        {
+            difficulty = newDifficulty;
+        }
         private int currentScore = 0;
         UIManager uiManager;
         public UIManager UIManager { get { return uiManager; } }
@@ -35,6 +41,12 @@ namespace FlappyPlame
         {
             currentScore += score;
             uiManager.UpdateScore(currentScore);
+        }
+        public void IsClear()
+        {
+            switch(difficulty)
+            {
+            }
         }
     }
 }

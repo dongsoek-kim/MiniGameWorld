@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-namespace FlappyPlame
+namespace FlappyPlane
 {
     public class UIManager : MonoBehaviour
     {
