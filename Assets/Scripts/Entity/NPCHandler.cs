@@ -28,7 +28,7 @@ public class NPCHandler : MonoBehaviour
         foreach (GameObject npc in npcObjects)
         {
             float distance = Vector3.Distance(player.transform.position, npc.transform.position);
-            if (distance <= interactionRadius && Input.GetKeyDown(KeyCode.Space))
+            if (distance <= interactionRadius && (Input.GetKeyDown(KeyCode.Space)|| Input.GetMouseButtonDown(0)))
             {
                 Debug.Log(npc.name);  // 해당 NPC 이름 출력
                 Debug.Log("반응!");

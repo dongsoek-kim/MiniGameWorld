@@ -31,18 +31,10 @@ namespace FlappyPlane
         {
             uiManager.UpdateScore(0);
         }
-        private void Update()
-        {
-        }
         public void GameOver()
         {
             uiManager.SetGameOver();
         }
-        public void RestartGame()
-        {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        }
-
         public void ONGameClear()
         {
             uiManager.SetGameClear();

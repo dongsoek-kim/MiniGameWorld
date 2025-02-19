@@ -88,8 +88,25 @@ public class MiniGameManager : MonoBehaviour
             // 해당 씬으로 이동 (게임 씬 이름은 "Game" + 게임 번호)
             Debug.Log($"게임번호{ gameNumber}");
             Debug.Log($"난이도{difficulty}");
-            FlappyPlane.GameManager.SetGameDifficulty(difficulty);
-            SceneManager.LoadScene($"MiniGame{gameNumber+1}");
+            switch(gameNumber)
+            {
+                case 0:
+                    Stack.GameManager.SetGameDifficulty(difficulty);
+                    SceneManager.LoadScene($"MiniGame{gameNumber + 1}");
+                    break;
+                case 1:
+                    FlappyPlane.GameManager.SetGameDifficulty(difficulty);
+                    SceneManager.LoadScene($"MiniGame{gameNumber + 1}");
+                    break;
+                case 2:
+                    //SceneManager.LoadScene($"MiniGame{gameNumber + 1}");
+                    break;
+                case 3:
+                    //SceneManager.LoadScene($"MiniGame{gameNumber + 1}");
+                    break;
+                default:
+                    break;
+            }
         }
         else
         {
