@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -19,28 +20,19 @@ public class MiniGameUI : BaseUI
         return UIState.MiniGame;
     }
 
-    private void SelectMiniGame(string name)
+    public void SelectMiniGame(string name)
     {
-        miniGameList[0].SetActive(false);
-        miniGameList[1].SetActive(false);
-        miniGameList[2].SetActive(false);
-        miniGameList[3].SetActive(false);
-        switch (name)
+        for (int i = 0; i < miniGameList.Length; i++)
         {
-            case "MiniGame1 NPC":
-                miniGameList[0].SetActive(true);
-                break;
-            case "MiniGame2 NPC":
-                miniGameList[1].SetActive(true);
-                break;
-            case "MiniGame3 NPC":
-                miniGameList[2].SetActive(true);
-                break;
-            case "MiniGame4 NPC":
-                miniGameList[3].SetActive(true);
-                break;
-            default:
-                break;
+            miniGameList[i].SetActive(false);
+        }
+
+        int npcIndex = Array.IndexOf(NPCManager.Instance.npcName, name);
+
+        if (npcIndex >= 1 && npcIndex < miniGameList.Length)
+        {
+            miniGameList[npcIndex - 1].SetActive(true);
         }
     }
+
 }

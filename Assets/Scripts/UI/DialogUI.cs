@@ -1,8 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Rendering;
+using static UnityEngine.GraphicsBuffer;
 
 public class DialogUI : BaseUI
 {
@@ -47,6 +49,7 @@ public class DialogUI : BaseUI
         yield return new WaitUntil(() => Input.anyKeyDown);
         nameText.text = "";
         dialogText.text = "";
+        GameManager.Instance.OnDialogFinished?.Invoke(Array.IndexOf(NPCManager.Instance.npcName, name));
         SetActive(UIState.Home);
 
     }

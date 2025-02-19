@@ -51,9 +51,10 @@ public class UIManager : MonoBehaviour
         ChangeState(UIState.Dialog);
     }
 
-    public void SetMiniGame()
+    public void SetMiniGame(string name)
     {
         ChangeState(UIState.MiniGame);
+        miniGameUI.SelectMiniGame(name);
     }
 
     public void SetShop()
@@ -67,7 +68,6 @@ public class UIManager : MonoBehaviour
     //}
     public void SetDailog(string name,string[] dialog)
     {
-        Debug.Log("SetDailog");
         dialogUI.SetText(name, dialog);
     }
     public void ChangeState(UIState state)

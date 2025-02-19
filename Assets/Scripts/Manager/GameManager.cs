@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,7 +8,11 @@ public class GameManager : MonoBehaviour
     private static GameManager instance;
     private UIManager uiManager;
     private DialogManager dialogManager;
-    private MiniGameManager miniGameManager;   
+    private MiniGameManager miniGameManager;
+    private NPCManager npcManager;
+
+    public Action<int> OnDialogFinished;
+
     public static GameManager Instance
     {
         get
@@ -32,6 +37,8 @@ public class GameManager : MonoBehaviour
         uiManager = FindObjectOfType<UIManager>();
         dialogManager = FindObjectOfType<DialogManager>();
         miniGameManager = FindObjectOfType<MiniGameManager>();
+        npcManager = FindObjectOfType<NPCManager>();
+        OnDialogFinished += HandleDialogFinished;
         if (instance != null && instance != this)
         {
             Destroy(gameObject);
@@ -41,6 +48,10 @@ public class GameManager : MonoBehaviour
             instance = this;
             DontDestroyOnLoad(gameObject); // 씬 전환 시에도 이 객체를 유지
         }
+    }
+
+    private void Start()
+    {
     }
     public void OnInteract(string npcName)
     {
@@ -52,18 +63,22 @@ public class GameManager : MonoBehaviour
             case "MiniGame1 NPC":
                 Debug.Log("미니게임1 NPC와 대화를 시작합니다.");
                 DialogOut(1);
+                //MiniGameStart(npcName);
                 break;
             case "MiniGame2 NPC":
                 Debug.Log("미니게임2 NPC와 대화를 시작합니다.");
                 DialogOut(2);
+                //MiniGameStart(npcName);
                 break;
             case "MiniGame3 NPC":
                 Debug.Log("미니게임3 NPC와 대화를 시작합니다.");
                 DialogOut(3);
+                //MiniGameStart(npcName);
                 break;
             case "MiniGame4 NPC":
                 Debug.Log("미니게임4 NPC와 대화를 시작합니다.");
                 DialogOut(4);
+                //MiniGameStart(npcName);
                 break;
         }
     }
@@ -72,9 +87,16 @@ public class GameManager : MonoBehaviour
         uiManager.Setdialog();
         dialogManager.DialogOut(miniGameNumber);        
     }
-    public void MiniGameStart()
+    private void HandleDialogFinished(int gameNumber)
     {
-        uiManager.SetMiniGame();
+        Debug.Log($"게임 {gameNumber} 미니게임 시작!");
+        MiniGameStart(npcManager.npcName[gameNumber]);
+        
+    }
+
+    public void MiniGameStart(string name)
+    {
+        uiManager.SetMiniGame(name);
     }
 
     public void OpenShop()

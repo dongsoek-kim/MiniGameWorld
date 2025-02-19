@@ -55,8 +55,6 @@ public class DialogManager : MonoBehaviour
     public void DialogOut(int miniGameNumber)
     {
         LoadDialog(miniGameNumber);
-        //uiManager.SetMiniGame();
-
     }
     //미니게임매니저에 진행도에 따라 대사 수정
     private void LoadDialog(int miniGameNumber)
