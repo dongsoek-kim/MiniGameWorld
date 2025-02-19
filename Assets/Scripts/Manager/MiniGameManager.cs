@@ -4,7 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using System;
 using UnityEngine.SceneManagement;
-using FlappyPlane;
+//using FlappyPlane;
 
 public class MiniGameManager : MonoBehaviour
 {
@@ -28,7 +28,7 @@ public class MiniGameManager : MonoBehaviour
             return instance;
         }
     }
-    private UIManager uiManager;
+    [SerializeField]private UIManager uiManager;
 
     // 5개의 미니게임 진행 상태 (0~4: 진행도, 0은 미클리어, 1~4는 스테이지 클리어)
     public int[] minigameProgress = new int[4];

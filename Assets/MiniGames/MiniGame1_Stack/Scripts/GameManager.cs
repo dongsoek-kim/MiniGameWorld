@@ -4,14 +4,17 @@ using UnityEngine;
 using System;
 using FlappyPlane;
 using Unity.VisualScripting;
+using UnityEngine.SceneManagement;
 
 namespace Stack
 {
     public class GameManager : MonoBehaviour
     {
         public static int difficulty;
-        private bool clear;
+        private bool isClear;
         public Action GameClear;
+        float deathCooldown = 1f;
+        float clearCooldown = 1f;
 
         UIManager uiManager;
         public UIManager UIManager { get { return uiManager; } }
@@ -71,14 +74,42 @@ namespace Stack
                 if (PlaceBlock())
                 {
                     Spawn_Block();
-                    uiManager.UpdateScore(stackCount-1);
+                    uiManager.UpdateScore(stackCount - 1);
                     IsClear();
+                    if (isClear)
+                    {
+                        if (clearCooldown <= 0)
+                        {
+                            if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
+                            {
+                                SceneManager.LoadScene("MainScene");
+                            }
+                        }
+                        else
+                        {
+                            clearCooldown -= Time.deltaTime;
+                        }
+                    }
                 }
                 else
                 {
                     // 게임 오버
                     uiManager.SetGameOver();
                     GameOverEffect();
+                    if (deathCooldown <= 0)
+                    {
+                        //재시작
+                        if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
+                        {
+                            SceneManager.LoadScene("MainScene");
+                        }
+                    }
+                    else
+                    {
+                        deathCooldown -= Time.deltaTime;
+                    }
+
+
                 }
             }
 
@@ -237,7 +268,7 @@ namespace Stack
         public void IsClear()
         {
 
-            if (!clear)
+            if (!isClear)
             {
                 switch (difficulty)
 
@@ -246,7 +277,7 @@ namespace Stack
                         if (stackCount-1 >= 3)
                         {
                             Debug.Log("클리어");
-                            clear = true;
+                            isClear = true;
                             GameClear?.Invoke();
                             MiniGameManager.Instance.StageClear?.Invoke(2, 1);//결합도 문제
                         }
@@ -255,7 +286,7 @@ namespace Stack
                         if (stackCount-1 >= 3)
                         {
                             Debug.Log("클리어");
-                            clear = true;
+                            isClear = true;
                             GameClear?.Invoke();
                             MiniGameManager.Instance.StageClear?.Invoke(2, 2);//결합도 문제
                         }
@@ -265,7 +296,7 @@ namespace Stack
                         if (stackCount-1 >= 3)
                         {
                             Debug.Log("클리어");
-                            clear = true;
+                            isClear = true;
                             GameClear?.Invoke();
                             MiniGameManager.Instance.StageClear?.Invoke(2, 3);//결합도 문제
                         }
@@ -275,7 +306,7 @@ namespace Stack
                         if (stackCount-1 >= 3)
                         {
                             Debug.Log("클리어");
-                            clear = true;
+                            isClear = true;
                             GameClear?.Invoke();
                             MiniGameManager.Instance.StageClear?.Invoke(2, 4);//결합도 문제
                         }

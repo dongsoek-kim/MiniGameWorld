@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     private static GameManager instance;
+    [SerializeField]
     private UIManager uiManager;
     private DialogManager dialogManager;
     private MiniGameManager miniGameManager;

@@ -15,11 +15,11 @@ public enum UIState
 public class UIManager : MonoBehaviour
 {
 
-    [SerializeField]HomeUI homeUI;
-    [SerializeField] CustomazingUI customazingUI;
-    [SerializeField] DialogUI dialogUI;
-    [SerializeField] MiniGameUI miniGameUI;
-    [SerializeField] ShopUI shopUI;
+    HomeUI homeUI;
+    CustomazingUI customazingUI;
+    DialogUI dialogUI;
+    MiniGameUI miniGameUI;
+    ShopUI shopUI;
     private UIState currentState;
 
 

@@ -10,8 +10,8 @@ public class MiniGameUI : BaseUI
     public override void Init(UIManager uiManager)
     {
         base.Init(uiManager);
+        Exitbutton.onClick.RemoveAllListeners();
         Exitbutton.onClick.AddListener(OnClickExitButton);
-
     }
     public Button Exitbutton;
     public Button[] easyButtons;
@@ -20,7 +20,7 @@ public class MiniGameUI : BaseUI
     public Button[] challengeButtons;
 
     // 활성화된 UI 인덱스를 추적 (0~3) 
-    public GameObject[] miniGameUIs;
+    //public GameObject[] miniGameUIs;
 
 
     protected override UIState GetUIState()
@@ -53,6 +53,10 @@ public class MiniGameUI : BaseUI
         Button hardButton = hardButtons[gameNumber];
         Button challengeButton = challengeButtons[gameNumber];
 
+        easyButton.onClick.RemoveAllListeners();
+        normalButton.onClick.RemoveAllListeners();
+        hardButton.onClick.RemoveAllListeners();
+        challengeButton.onClick.RemoveAllListeners();
         // 각 버튼에 클릭 리스너를 추가
         easyButton.onClick.AddListener(() => OnButtonClicked(gameNumber, 0));
         normalButton.onClick.AddListener(() => OnButtonClicked(gameNumber, 1));
@@ -64,6 +68,7 @@ public class MiniGameUI : BaseUI
     private void OnButtonClicked(int gameNumber, int difficulty)
     {
         // 미니게임 매니저에 게임 번호와 난이도 전달
+        Debug.Log($"OnButtonClicked invoked with gameNumber: {gameNumber}, difficulty: {difficulty}");
         MiniGameManager.Instance.ReceiveGameData(gameNumber, difficulty);
     }
 
