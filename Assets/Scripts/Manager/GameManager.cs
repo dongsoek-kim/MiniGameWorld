@@ -7,13 +7,12 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     private static GameManager instance;
-    [SerializeField] private UIManager uiManager;
+    private UIManager uiManager;
     private DialogManager dialogManager;
     private MiniGameManager miniGameManager;
-    [SerializeField] private NPCManager npcManager;
-
+    private NPCManager npcManager;
+    public int Coin { get; set; } = 0;
     public Action<int> DialogFinished;
-    public int coin { get; set; }
     public static GameManager Instance
     {
         get

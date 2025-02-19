@@ -84,7 +84,7 @@ namespace FlappyPlane
                 return;
 
             Vector3 velocity = _rigidbody.velocity;
-            velocity.x = forwardSpeed+gameManager.difficulty;//난이도에따른 속도증가
+            velocity.x = forwardSpeed+GameManager.difficulty;//난이도에따른 속도증가
             if (isClear)
             {
                 Collider2D collider = GetComponent<Collider2D>();

@@ -9,6 +9,8 @@ using FlappyPlane;
 public class MiniGameManager : MonoBehaviour
 {
     private static MiniGameManager instance;
+    private bool ischallengeMode = false;
+    private bool[] stage3Clear = new bool[4];
     public static MiniGameManager Instance
     {
         get
@@ -51,10 +53,32 @@ public class MiniGameManager : MonoBehaviour
     // 예시: 특정 미니게임의 진행도를 설정
     public void StageClearHandler(int gameNumber, int progress)
     {
-        if (gameNumber >= 0 && gameNumber < minigameProgress.Length&& minigameProgress[gameNumber]<progress)
+    
+        if(progress==3&& stage3Clear[gameNumber])//이미 3스테이지 클리어
+        {
+            if (ischallengeMode)//챌린지 모드가 열렸다면
+                minigameProgress[gameNumber] = progress;
+            else
+                Debug.Log("챌린지 모드가 아닙니다.");
+            GameManager.Instance.Coin += 5;
+        }
+        else if(progress==3&& !stage3Clear[gameNumber])
+        {
+            GameManager.Instance.Coin += 500;
+            stage3Clear[gameNumber] = true;
+        }
+        else if(progress>4)
+        {
+            Debug.Log("진행도가 4를 넘을 수 없습니다.");
+            GameManager.Instance.Coin += 5;
+        }
+        else if (gameNumber >= 0 && gameNumber < minigameProgress.Length && minigameProgress[gameNumber] < progress)
         {
             minigameProgress[gameNumber] = progress;
+            GameManager.Instance.Coin += 500;
         }
+        else
+            GameManager.Instance.Coin += 5;
     }
     public void ReceiveGameData(int gameNumber, int difficulty)
     {

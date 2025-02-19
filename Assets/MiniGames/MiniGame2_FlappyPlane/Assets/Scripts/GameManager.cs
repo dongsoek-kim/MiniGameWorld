@@ -10,10 +10,11 @@ namespace FlappyPlane
     {
         static GameManager gameManager;
         public static GameManager Instance { get { return gameManager; } }
-        public int difficulty;
+        public static int difficulty;
+        private bool clear;
         public Action GameClear;
         // 게임 난이도 설정
-        public void SetGameDifficulty(int newDifficulty)
+        public static void SetGameDifficulty(int newDifficulty)
         {
             difficulty = newDifficulty;
         }
@@ -32,7 +33,6 @@ namespace FlappyPlane
         }
         private void Update()
         {
-            IsClear();
         }
         public void GameOver()
         {
@@ -51,47 +51,57 @@ namespace FlappyPlane
         {
             currentScore += score;
             uiManager.UpdateScore(currentScore);
+            IsClear();
         }
         public void IsClear()
         {
-            switch (difficulty)
+
+            if (!clear)
             {
-                case 0://easy
-                    if (currentScore >= 7)
-                    {
-                        Debug.Log("클리어");
-                        GameClear?.Invoke();
-                        MiniGameManager.Instance.StageClear?.Invoke(1, 1);//결합도 문제
-                    }
-                    break;
-                case 1://normal
-                    if (currentScore >= 15)
-                    {
-                        Debug.Log("클리어");
-                        GameClear?.Invoke();
-                        MiniGameManager.Instance.StageClear?.Invoke(2, 1);//결합도 문제
-                    }
-                    break;
-                case 2://hard
+                switch (difficulty)
 
-                    if (currentScore >= 20)
-                    {
-                        Debug.Log("클리어");
-                        GameClear?.Invoke();
-                        MiniGameManager.Instance.StageClear?.Invoke(3, 1);//결합도 문제
-                    }
-                    break;
-                case 3://challenge
+                {
+                    case 0://easy
+                        if (currentScore >= 1)
+                        {
+                            Debug.Log("클리어");
+                            clear = true;
+                            GameClear?.Invoke();
+                            MiniGameManager.Instance.StageClear?.Invoke(1, 1);//결합도 문제
+                        }
+                        break;
+                    case 1://normal
+                        if (currentScore >= 1)
+                        {
+                            Debug.Log("클리어");
+                            clear = true;
+                            GameClear?.Invoke();
+                            MiniGameManager.Instance.StageClear?.Invoke(1, 2);//결합도 문제
+                        }
+                        break;
+                    case 2://hard
 
-                    if (currentScore >= 30)
-                    {
-                        Debug.Log("클리어");
-                        GameClear?.Invoke();
-                        //MiniGameManager.Instance.StageClear?.Invoke(4, 1);//결합도 문제
-                    }
-                    break;
-                default:
-                    break;
+                        if (currentScore >= 1)
+                        {
+                            Debug.Log("클리어");
+                            clear = true;
+                            GameClear?.Invoke();
+                            MiniGameManager.Instance.StageClear?.Invoke(1, 3);//결합도 문제
+                        }
+                        break;
+                    case 3://challenge
+
+                        if (currentScore >= 1)
+                        {
+                            Debug.Log("클리어");
+                            clear = true;
+                            GameClear?.Invoke();
+                            MiniGameManager.Instance.StageClear?.Invoke(1, 4);//결합도 문제
+                        }
+                        break;
+                    default:
+                        break;
+                }
             }
         }
     }

@@ -39,10 +39,10 @@ public class UIManager : MonoBehaviour
         ChangeState(UIState.Home);
     }
 
-
+  
     public void SetHome()
     {
-        ChangeState(UIState.Home);
+        ChangeState(UIState.Home);   
     }
     public void SetCostomazing()
     {

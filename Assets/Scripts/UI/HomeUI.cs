@@ -1,25 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class HomeUI : BaseUI
 {
-    //[SerializeField] private Button startButton;
-    //[SerializeField] private Button exitButton;
+    [SerializeField] TextMeshProUGUI coinText;
+    public void Update()
+    {
+        Coin();
+    }
 
     public override void Init(UIManager uiManager)
     {
         base.Init(uiManager);
     }
 
-    public void OnClickStartButton()
+    public void Coin()
     {
+        coinText.text = GameManager.Instance.Coin.ToString();
     }
 
-    public void OnClickExitButton()
-    {
-    }
 
     protected override UIState GetUIState()
     {

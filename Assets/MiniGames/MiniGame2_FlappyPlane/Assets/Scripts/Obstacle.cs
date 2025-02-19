@@ -17,7 +17,7 @@ namespace FlappyPlane
         public Transform bottomObject;
 
         public float widthPadding = 4f;
-
+        private bool clear;
         GameManager gameManager;
         private void Start()
         {
@@ -45,7 +45,7 @@ namespace FlappyPlane
             if (player != null)
             {
                 gameManager.AddScore(1);
-            }
+            }           
         }
 
     }
