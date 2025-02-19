@@ -10,10 +10,10 @@ namespace FlappyPlane
     {
         static GameManager gameManager;
         public static GameManager Instance { get { return gameManager; } }
-        private static int difficulty;
+        public int difficulty;
         public Action GameClear;
         // 게임 난이도 설정
-        public static void SetGameDifficulty(int newDifficulty)
+        public void SetGameDifficulty(int newDifficulty)
         {
             difficulty = newDifficulty;
         }
@@ -54,15 +54,43 @@ namespace FlappyPlane
         }
         public void IsClear()
         {
-            switch(difficulty)
+            switch (difficulty)
             {
-                case 0:
-                    if (currentScore >= 3)
+                case 0://easy
+                    if (currentScore >= 7)
                     {
                         Debug.Log("클리어");
                         GameClear?.Invoke();
                         MiniGameManager.Instance.StageClear?.Invoke(1, 1);//결합도 문제
                     }
+                    break;
+                case 1://normal
+                    if (currentScore >= 15)
+                    {
+                        Debug.Log("클리어");
+                        GameClear?.Invoke();
+                        MiniGameManager.Instance.StageClear?.Invoke(2, 1);//결합도 문제
+                    }
+                    break;
+                case 2://hard
+
+                    if (currentScore >= 20)
+                    {
+                        Debug.Log("클리어");
+                        GameClear?.Invoke();
+                        MiniGameManager.Instance.StageClear?.Invoke(3, 1);//결합도 문제
+                    }
+                    break;
+                case 3://challenge
+
+                    if (currentScore >= 30)
+                    {
+                        Debug.Log("클리어");
+                        GameClear?.Invoke();
+                        //MiniGameManager.Instance.StageClear?.Invoke(4, 1);//결합도 문제
+                    }
+                    break;
+                default:
                     break;
             }
         }

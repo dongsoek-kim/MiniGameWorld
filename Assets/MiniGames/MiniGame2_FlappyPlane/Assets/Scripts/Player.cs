@@ -19,7 +19,7 @@ namespace FlappyPlane
         bool isFlap = false;
         bool isClear = false;
         public bool godMode = false;
-        public int coin { get; set; }
+
 
         GameManager gameManager;
         // Start is called before the first frame update
@@ -84,7 +84,7 @@ namespace FlappyPlane
                 return;
 
             Vector3 velocity = _rigidbody.velocity;
-            velocity.x = forwardSpeed;
+            velocity.x = forwardSpeed+gameManager.difficulty;//난이도에따른 속도증가
             if (isClear)
             {
                 Collider2D collider = GetComponent<Collider2D>();

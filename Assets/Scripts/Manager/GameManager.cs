@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private NPCManager npcManager;
 
     public Action<int> DialogFinished;
-
+    public int coin { get; set; }
     public static GameManager Instance
     {
         get
