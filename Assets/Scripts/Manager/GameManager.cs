@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
     private MiniGameManager miniGameManager;
     private NPCManager npcManager;
 
-    public Action<int> OnDialogFinished;
+    public Action<int> DialogFinished;
 
     public static GameManager Instance
     {
@@ -38,7 +38,7 @@ public class GameManager : MonoBehaviour
         dialogManager = FindObjectOfType<DialogManager>();
         miniGameManager = FindObjectOfType<MiniGameManager>();
         npcManager = FindObjectOfType<NPCManager>();
-        OnDialogFinished += HandleDialogFinished;
+        DialogFinished += DialogFinishedHandler;
         if (instance != null && instance != this)
         {
             Destroy(gameObject);
@@ -87,7 +87,7 @@ public class GameManager : MonoBehaviour
         uiManager.Setdialog();
         dialogManager.DialogOut(miniGameNumber);        
     }
-    private void HandleDialogFinished(int gameNumber)
+    private void DialogFinishedHandler(int gameNumber)
     {
         Debug.Log($"게임 {gameNumber} 미니게임 시작!");
         MiniGameStart(npcManager.npcName[gameNumber]);

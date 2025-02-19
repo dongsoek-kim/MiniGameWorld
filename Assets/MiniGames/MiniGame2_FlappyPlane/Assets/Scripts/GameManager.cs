@@ -30,6 +30,7 @@ namespace FlappyPlane
         }
         public void GameOver()
         {
+            IsClear();
             uiManager.SetRestart();
         }
         public void RestartGame()
@@ -46,6 +47,13 @@ namespace FlappyPlane
         {
             switch(difficulty)
             {
+                case 0:
+                    if (currentScore >= 3)
+                    {
+                        Debug.Log("클리어");
+                        MiniGameManager.Instance.StageClear?.Invoke(1, 1);//결합도 문제
+                    }
+                    break;
             }
         }
     }
