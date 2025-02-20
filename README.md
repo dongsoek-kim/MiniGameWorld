@@ -37,14 +37,19 @@
    3-3 장애물 폭발
 
 ![image](https://github.com/user-attachments/assets/08f688a5-988d-4f5b-90d0-2526a65efdd2)
+  
   촌장과의 상호작용을 통해 1500골드를 보유시 폭발이벤트 진행
+
 ![image](https://github.com/user-attachments/assets/904530b7-92da-4f06-b82f-830ca411ff03)
+  
   터진다..
 
   3-4 얼음맵
   밟으면 미끄러지는 얼음맵 구현
   맵에 진입하면 캐릭터 조종이 불가능해지며 벽이나 바위에 부딫힐경우 다시 방향을 설정 할 수 있다.
+  
   ![image](https://github.com/user-attachments/assets/3d80ad9d-cdf8-4ff8-930c-bcc155b5983d)
+  
   캐릭터가 움직이지 못하는 경우 x키를 누르면 출발 위치로 조정된다.
 
 ---------------------
