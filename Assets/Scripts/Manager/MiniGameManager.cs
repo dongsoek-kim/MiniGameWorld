@@ -100,7 +100,8 @@ public class MiniGameManager : MonoBehaviour
                     SceneManager.LoadScene($"MiniGame{gameNumber + 1}");
                     break;
                 case 2:
-                    //SceneManager.LoadScene($"MiniGame{gameNumber + 1}");
+                    TopDown.GameManager.SetGameDifficulty(difficulty);
+                    SceneManager.LoadScene($"MiniGame{gameNumber + 1}");
                     break;
                 case 3:
                     //SceneManager.LoadScene($"MiniGame{gameNumber + 1}");

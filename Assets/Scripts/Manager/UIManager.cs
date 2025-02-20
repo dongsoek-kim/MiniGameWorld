@@ -9,7 +9,8 @@ public enum UIState
     Customazing,
     Dialog,
     MiniGame,
-    Shop
+    Shop,
+    Leaderboard
 }
 
 public class UIManager : MonoBehaviour
@@ -20,6 +21,7 @@ public class UIManager : MonoBehaviour
     DialogUI dialogUI;
     MiniGameUI miniGameUI;
     ShopUI shopUI;
+    LeaderBoardUI LeaderBoardUI;
     private UIState currentState;
 
 
@@ -36,6 +38,8 @@ public class UIManager : MonoBehaviour
         miniGameUI.Init(this);
         shopUI = GetComponentInChildren<ShopUI>(true);
         shopUI.Init(this);
+        LeaderBoardUI = GetComponentInChildren<LeaderBoardUI>(true);
+        LeaderBoardUI.Init(this);
         ChangeState(UIState.Home);
     }
 
@@ -66,6 +70,10 @@ public class UIManager : MonoBehaviour
         ChangeState(UIState.Shop);
     }
 
+    private void SetLeaderBoard()
+    {
+        ChangeState(UIState.Leaderboard);
+    }
     //public void ChangeWave(int waveIndex)
     //{
     //    minigameUI.UpdateWaveText(waveIndex);
