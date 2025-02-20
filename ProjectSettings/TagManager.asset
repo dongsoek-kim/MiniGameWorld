@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - NPC
+  - IceTile
+  - Block
+  - EndSpot
   layers:
   - Default
   - TransparentFX

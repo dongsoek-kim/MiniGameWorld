@@ -17,11 +17,10 @@ public class RockBoom : MonoBehaviour
     private IEnumerator RockBoomSequence()
     {
         FollowCamera follow = Camera.main.GetComponent<FollowCamera>();
-        MainPlayerController player = FindObjectOfType<MainPlayerController>();
         if (follow != null)
         {
             follow.enabled = false;
-            player.enabled = false;
+            GameManager.Instance.player.enabled = false;
         }
         Vector3 originalPosition = Camera.main.transform.position;
         Vector3 targetPosition = new Vector3(1.6f, 6.5f, originalPosition.z);
@@ -51,7 +50,7 @@ public class RockBoom : MonoBehaviour
         {
             follow.enabled = true;
             Camera.main.transform.position = originalPosition;
-            player.enabled = true;
+            GameManager.Instance.player.enabled = true;
         }
 
         Destroy(gameObject, 2f);
