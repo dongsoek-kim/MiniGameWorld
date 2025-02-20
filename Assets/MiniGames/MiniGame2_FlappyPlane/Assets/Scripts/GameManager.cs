@@ -54,7 +54,7 @@ namespace FlappyPlane
 
                 {
                     case 0://easy
-                        if (currentScore >= 1)
+                        if (currentScore >= 5)
                         {
                             Debug.Log("클리어");
                             clear = true;
@@ -63,7 +63,7 @@ namespace FlappyPlane
                         }
                         break;
                     case 1://normal
-                        if (currentScore >= 1)
+                        if (currentScore >= 7)
                         {
                             Debug.Log("클리어");
                             clear = true;
@@ -73,7 +73,7 @@ namespace FlappyPlane
                         break;
                     case 2://hard
 
-                        if (currentScore >= 1)
+                        if (currentScore >= 9)
                         {
                             Debug.Log("클리어");
                             clear = true;
@@ -83,7 +83,7 @@ namespace FlappyPlane
                         break;
                     case 3://challenge
 
-                        if (currentScore >= 1)
+                        if (currentScore >= 11)
                         {
                             Debug.Log("클리어");
                             clear = true;

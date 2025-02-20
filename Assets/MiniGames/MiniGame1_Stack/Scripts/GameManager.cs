@@ -274,7 +274,7 @@ namespace Stack
 
                 {
                     case 0://easy
-                        if (stackCount-1 >= 3)
+                        if (stackCount-1 >= 5)
                         {
                             Debug.Log("클리어");
                             isClear = true;
@@ -283,7 +283,7 @@ namespace Stack
                         }
                         break;
                     case 1://normal
-                        if (stackCount-1 >= 3)
+                        if (stackCount-1 >= 7)
                         {
                             Debug.Log("클리어");
                             isClear = true;
@@ -293,7 +293,7 @@ namespace Stack
                         break;
                     case 2://hard
 
-                        if (stackCount-1 >= 3)
+                        if (stackCount-1 >= 9)
                         {
                             Debug.Log("클리어");
                             isClear = true;
@@ -303,7 +303,7 @@ namespace Stack
                         break;
                     case 3://challenge
 
-                        if (stackCount-1 >= 3)
+                        if (stackCount-1 >= 15)
                         {
                             Debug.Log("클리어");
                             isClear = true;
