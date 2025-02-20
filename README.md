@@ -1,5 +1,7 @@
-![image](https://github.com/user-attachments/assets/482bb382-0b18-4019-b3d6-dc7d1eea8f78)
 메타버스만들기!
+
+![image](https://github.com/user-attachments/assets/482bb382-0b18-4019-b3d6-dc7d1eea8f78)
+
 
 미니게임을 즐기는 메타버스를 만들어보자.
 
