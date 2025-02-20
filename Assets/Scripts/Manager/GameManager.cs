@@ -13,7 +13,8 @@ public class GameManager : MonoBehaviour
     private MiniGameManager miniGameManager;
     private NPCManager npcManager;
     private RockBoom rockBoom;
-    public int Coin { get; set; } =1500;
+    public Transform storeTransform;
+    public int Coin { get; set; } = 1500;
     public Action<int> DialogFinished;
     public MainPlayerController player;
     public static GameManager Instance
@@ -40,7 +41,7 @@ public class GameManager : MonoBehaviour
         {
             uiManager = FindObjectOfType<UIManager>();  // UIManager를 씬에서 찾음
         }
-        if(player ==null)
+        if (player == null)
         {
             player = FindObjectOfType<MainPlayerController>();
         }
@@ -103,6 +104,8 @@ public class GameManager : MonoBehaviour
     {
         if (NPCNumber > 0 && NPCNumber < 5)
         {
+            player.StorePlayerTransform();
+            Debug.Log($"저장된위치{storeTransform.position}");
             Debug.Log($"게임 {NPCNumber} 미니게임 시작!");
             MiniGameStart(npcManager.npcName[NPCNumber]);
         }
@@ -174,9 +177,10 @@ public class GameManager : MonoBehaviour
         {
             uiManager = FindObjectOfType<UIManager>();
         }
-        if(player == null)
+        if (player == null)
         {
             player = FindObjectOfType<MainPlayerController>();
         }
+        player.SetPlayerTransform();
     }
 }

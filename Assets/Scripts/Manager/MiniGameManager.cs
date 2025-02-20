@@ -85,6 +85,7 @@ public class MiniGameManager : MonoBehaviour
         // 게임 해금 여부 체크
         if (CheckGameUnlock(gameNumber, difficulty))
         {
+            
             // 해당 씬으로 이동 (게임 씬 이름은 "Game" + 게임 번호)
             Debug.Log($"게임번호{ gameNumber}");
             Debug.Log($"난이도{difficulty}");

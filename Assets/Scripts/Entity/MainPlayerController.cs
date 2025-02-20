@@ -5,7 +5,6 @@ using UnityEngine;
 public class MainPlayerController : MonoBehaviour
 {
     public SPUM_Prefabs player;
-
     private Animator animator;
     private void Awake()
     {
@@ -25,7 +24,7 @@ public class MainPlayerController : MonoBehaviour
         float moveY = Input.GetAxis("Vertical");
 
         // 이동 벡터 계산
-        Vector3 moveVector = new Vector3(moveX, moveY, 0f);
+        Vector2 moveVector = new Vector2(moveX, moveY);
 
         // 캐릭터 이동
         transform.Translate(moveVector.normalized * Time.deltaTime * 5f);
@@ -37,11 +36,11 @@ public class MainPlayerController : MonoBehaviour
             player._anim.SetBool("1_Move", true);  // "isMove"라는 bool 파라미터가 Animator에 존재한다고 가정
             if (moveX > 0)  // 오른쪽으로 이동
             {
-                transform.localScale = new Vector3(-1f, 1f, 1f);  // 오른쪽으로 향하게 설정
+                transform.localScale = new Vector2(-1f, 1f);  // 오른쪽으로 향하게 설정
             }
             else if (moveX < 0)  // 왼쪽으로 이동
             {
-                transform.localScale = new Vector3(1f, 1f, 1f);  // 왼쪽으로 향하게 설정
+                transform.localScale = new Vector2(1f, 1f);  // 왼쪽으로 향하게 설정
             }
         }
         else
@@ -49,5 +48,13 @@ public class MainPlayerController : MonoBehaviour
             
             player._anim.SetBool("1_Move", false);  // "isMove"를 false로 설정하여 이동하지 않을 때의 애니메이션 실행
         }
+    }
+    public void SetPlayerTransform()
+    {
+        transform.position = new Vector3(GameManager.Instance.storeTransform.position.x,GameManager.Instance.storeTransform.position.y);
+    }
+    public void StorePlayerTransform()
+    {
+        GameManager.Instance.storeTransform.position= transform.position;
     }
 }
