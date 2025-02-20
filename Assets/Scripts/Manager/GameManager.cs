@@ -12,8 +12,10 @@ public class GameManager : MonoBehaviour
     private DialogManager dialogManager;
     private MiniGameManager miniGameManager;
     private NPCManager npcManager;
-    public int Coin { get; set; } = 0;
+    private RockBoom rockBoom;
+    public int Coin { get; set; } =1500;
     public Action<int> DialogFinished;
+    public MainPlayerController player;
     public static GameManager Instance
     {
         get
@@ -38,6 +40,10 @@ public class GameManager : MonoBehaviour
         {
             uiManager = FindObjectOfType<UIManager>();  // UIManager를 씬에서 찾음
         }
+        if(player ==null)
+        {
+            player = FindObjectOfType<MainPlayerController>();
+        }
         dialogManager = FindObjectOfType<DialogManager>();
         miniGameManager = FindObjectOfType<MiniGameManager>();
         npcManager = FindObjectOfType<NPCManager>();
@@ -60,8 +66,9 @@ public class GameManager : MonoBehaviour
     {
         switch (npcName)
         {
-            case " Village Chief":
+            case "VillageChief":
                 Debug.Log("마을장과 대화를 시작합니다.");
+                DialogVillageChiefOut();
                 break;
             case "MiniGame1 NPC":
                 Debug.Log("미니게임1 NPC와 대화를 시작합니다.");
@@ -81,18 +88,60 @@ public class GameManager : MonoBehaviour
                 break;
         }
     }
+
+    public void DialogVillageChiefOut()
+    {
+        uiManager.Setdialog();
+        dialogManager.DialogVillageChiefOut();
+    }
     public void DialogOut(int miniGameNumber)
     {
         uiManager.Setdialog();
         dialogManager.DialogOut(miniGameNumber);
     }
-    private void DialogFinishedHandler(int gameNumber)
+    private void DialogFinishedHandler(int NPCNumber)
     {
-        Debug.Log($"게임 {gameNumber} 미니게임 시작!");
-        MiniGameStart(npcManager.npcName[gameNumber]);
-
+        if (NPCNumber > 0 && NPCNumber < 5)
+        {
+            Debug.Log($"게임 {NPCNumber} 미니게임 시작!");
+            MiniGameStart(npcManager.npcName[NPCNumber]);
+        }
+        else if (NPCNumber == 0)
+        {
+            int progress = NPCManager.Instance.VillageChiefprogress;
+            if (progress == 0 || progress == 2)
+            {
+                NPCManager.Instance.PlusVillageChiefProgress();
+            }
+            else if (progress == 1)
+            {
+                if (Coin >= 1500)
+                {
+                    Coin -= 1500;
+                    NPCManager.Instance.PlusVillageChiefProgress();
+                    RockBoom();
+                }
+                else
+                {
+                    Debug.Log("코인이 부족합니다.");
+                }
+            }
+            else if (progress == 3)
+            {
+                //게임 전부 Hard모드로 클리어
+            }
+            else if (progress == 4)
+            {
+                //게임 전부 Challenge모드로 클리어   
+            }
+            uiManager.SetHome();
+        }
     }
-
+    public void RockBoom()
+    {
+        rockBoom = FindObjectOfType<RockBoom>();
+        rockBoom.BoomStart();
+    }
     public void MiniGameStart(string name)
     {
         uiManager.SetMiniGame(name);
@@ -124,6 +173,10 @@ public class GameManager : MonoBehaviour
         if (uiManager == null)
         {
             uiManager = FindObjectOfType<UIManager>();
+        }
+        if(player == null)
+        {
+            player = FindObjectOfType<MainPlayerController>();
         }
     }
 }

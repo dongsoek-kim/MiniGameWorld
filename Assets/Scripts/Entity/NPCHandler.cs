@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class NPCHandler : MonoBehaviour
@@ -5,7 +7,7 @@ public class NPCHandler : MonoBehaviour
     public float interactionRadius = 1.5f; // NPC와 상호작용할 수 있는 반경
     public string npcTag = "NPC"; // NPC의 태그 (예: "NPC"로 설정)
     private GameObject player;
-
+    private bool canReceiveInput = true;
     // 모든 자식 NPC를 관리하는 리스트
     private GameObject[] npcObjects;
 
@@ -24,6 +26,7 @@ public class NPCHandler : MonoBehaviour
 
     void Update()
     {
+        if (!canReceiveInput) return;
         // 모든 NPC에 대해 상호작용을 체크
         foreach (GameObject npc in npcObjects)
         {
@@ -32,10 +35,19 @@ public class NPCHandler : MonoBehaviour
             {
                 Debug.Log(npc.name);  // 해당 NPC 이름 출력
                 Debug.Log("반응!");
-
                 // NPC에 맞는 동작을 수행
                 NPCManager.Instance.OnInteract(npc.name);
             }
         }
+    }
+    public void UnlockInput()
+    {
+        // 잠시 대기 후 입력 재활성화 (예: 0.2초)
+        StartCoroutine(ResetInput());
+    }
+    private IEnumerator ResetInput()
+    {
+        yield return new WaitForSeconds(0.2f);
+        canReceiveInput = true;
     }
 }

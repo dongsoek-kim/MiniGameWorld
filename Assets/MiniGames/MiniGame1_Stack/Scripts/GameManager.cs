@@ -40,7 +40,7 @@ namespace Stack
         public Color prevColor;
         public Color nextColor;
         private bool isGameOver;
-
+        
 
         void Awake()
         {

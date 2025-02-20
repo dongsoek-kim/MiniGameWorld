@@ -42,7 +42,8 @@ public class UIManager : MonoBehaviour
   
     public void SetHome()
     {
-        ChangeState(UIState.Home);   
+        ChangeState(UIState.Home);
+        GameManager.Instance.player.enabled = true;
     }
     public void SetCostomazing()
     {

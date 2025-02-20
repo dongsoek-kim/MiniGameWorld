@@ -9,6 +9,7 @@ public class NPCManager : MonoBehaviour
 {
     private static NPCManager instance;
     public string[] npcName=new string[] {"촌장","토순이","성실이","겁쟁이기사","아타호"};
+    public int VillageChiefprogress { get; private set; } = 0;
     public static NPCManager Instance
     {
         get {
@@ -39,15 +40,13 @@ public class NPCManager : MonoBehaviour
             DontDestroyOnLoad(gameObject); // 씬 전환 시에도 이 객체를 유지
         }
     }
-    private void Start()
-    {
-    }
 
     public void OnInteract(string npcname)
     {
         if (instance != null)
         {
             Debug.Log("NPC와 대화를 시작합니다.");
+            GameManager.Instance.player.enabled = false;
         }
         else
         {
@@ -55,5 +54,9 @@ public class NPCManager : MonoBehaviour
         }
     
         GameManager.Instance.OnInteract(npcname);
+    }
+    public void PlusVillageChiefProgress()
+    {
+        VillageChiefprogress++;
     }
 }

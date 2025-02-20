@@ -52,6 +52,28 @@ public class DialogManager : MonoBehaviour
             DontDestroyOnLoad(gameObject); // 씬 전환 시에도 이 객체를 유지
         }
     }
+    public void DialogVillageChiefOut()
+    {
+        LoadDialogVillageChief();
+    }
+
+    private void LoadDialogVillageChief()
+    {
+        int VillageChiefProgress = NPCManager.Instance.VillageChiefprogress;
+        string fileName = "VillageChief_Dialog.json";
+        string folderPath = Path.Combine(Application.streamingAssetsPath, "Dialogs");
+        string filePath = Path.Combine(folderPath, fileName);
+        if (File.Exists(filePath))
+        {
+            string jsonData = File.ReadAllText(filePath);
+            DialogData[] dialogDataArray = JsonHelper.FromJson<DialogData>(jsonData);
+            uiManager.SetDailog("촌장", dialogDataArray[VillageChiefProgress].dialogText);
+        }
+        else
+        {
+            Debug.LogError("Dialog JSON 파일이 존재하지 않습니다: " + filePath);
+        }
+    }
 
     public void DialogOut(int miniGameNumber)
     {
@@ -87,6 +109,7 @@ public class DialogManager : MonoBehaviour
             Debug.LogError("Dialog JSON 파일이 존재하지 않습니다: " + filePath);
         }
     }
+
 
 
     // JSON 데이터를 다루는 유틸리티
