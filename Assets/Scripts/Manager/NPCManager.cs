@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public class NPCManager : MonoBehaviour
 {
     private static NPCManager instance;
-    public string[] npcName=new string[] {"촌장","토순이","성실이","겁쟁이기사","아타호"};
+    public string[] npcName=new string[] {"촌장","토순이","성실이","겁쟁이기사","아타호","순심씨"};
     public int VillageChiefprogress { get; private set; } = 0;
     public static NPCManager Instance
     {

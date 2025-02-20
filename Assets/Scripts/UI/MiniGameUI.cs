@@ -29,7 +29,7 @@ public class MiniGameUI : BaseUI
     }
     public void OnClickExitButton()
     {
-        GameManager.Instance.ExitMiniGame();
+        GameManager.Instance.ExitUI();
     }
     public void SelectMiniGame(string name)
     {
