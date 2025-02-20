@@ -70,8 +70,11 @@ public class UIManager : MonoBehaviour
     {
         ChangeState(UIState.Shop);
     }
-
-    private void SetLeaderBoard()
+    public void UpdateShop()
+    {
+        shopUI.UpdateShop();
+    }
+    public void SetLeaderBoard()
     {
         ChangeState(UIState.Leaderboard);
     }

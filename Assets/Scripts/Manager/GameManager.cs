@@ -1,3 +1,4 @@
+using FlappyPlane;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -14,10 +15,11 @@ public class GameManager : MonoBehaviour
     private NPCManager npcManager;
     private RockBoom rockBoom;
     public Transform storeTransform;
-    public int Coin { get; set; } 
+    public int Coin { get; set; } = 10;
     public Action<int> DialogFinished;
-    public MainPlayerController player;
+    public Player player;
     public NPCHandler npcHandler;
+    public Customizer costomizer;
     public static GameManager Instance
     {
         get
@@ -44,7 +46,7 @@ public class GameManager : MonoBehaviour
         }
         if (player == null)
         {
-            player = FindObjectOfType<MainPlayerController>();
+            player = FindObjectOfType<Player>();
         }
         if(npcHandler=null)
         {
@@ -93,6 +95,10 @@ public class GameManager : MonoBehaviour
                 Debug.Log("미니게임4 NPC와 대화를 시작합니다.");
                 DialogOut(4);
                 break;
+            case "Shop":
+                Debug.Log("상점과 대화를 시작합니다.");
+                DialogShop();
+                break;
         }
     }
 
@@ -106,6 +112,11 @@ public class GameManager : MonoBehaviour
         uiManager.Setdialog();
         dialogManager.DialogOut(miniGameNumber);
     }
+    public void DialogShop()
+    {
+        uiManager.Setdialog();
+        dialogManager.DialogShopOut();
+    }
     private void DialogFinishedHandler(int NPCNumber)
     {
         if (NPCNumber > 0 && NPCNumber < 5)
@@ -114,6 +125,10 @@ public class GameManager : MonoBehaviour
             Debug.Log($"저장된위치{storeTransform.position}");
             Debug.Log($"게임 {NPCNumber} 미니게임 시작!");
             MiniGameStart(npcManager.npcName[NPCNumber]);
+        }
+        else if (NPCNumber==5)
+        {
+            uiManager.SetShop();
         }
         else if (NPCNumber == 0)
         {
@@ -156,9 +171,13 @@ public class GameManager : MonoBehaviour
         uiManager.SetMiniGame(name);
     }
 
-    public void ExitMiniGame()
+    public void ExitUI()
     {
         uiManager.SetHome();
+    }
+    public void UpdateShop()
+    {
+        uiManager.UpdateShop();
     }
 
     public void OpenShop()
@@ -175,6 +194,21 @@ public class GameManager : MonoBehaviour
         SceneManager.sceneLoaded -= OnSceneLoaded;  // 씬 로드 후 이벤트 제거
     }
 
+    public void Costomaizing(int itemNum)
+    {
+        if (itemNum < 4)//머리
+        {
+            player.playerRender.ImageElement[8].ItemPath = "Addons/Legacy/0_Unit/0_Sprite/0_Hair/Hair_2";
+        }
+        else if (itemNum >= 4 && itemNum < 8)//옷
+        {
+
+        }
+        else//머리색
+        { 
+        }
+    }
+
     // 씬이 로드된 후 UIManager를 다시 할당
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
@@ -185,7 +219,7 @@ public class GameManager : MonoBehaviour
         }
         if (player == null)
         {
-            player = FindObjectOfType<MainPlayerController>();
+            player = FindObjectOfType<Player>();
         }
         if(npcHandler   ==null)
         {

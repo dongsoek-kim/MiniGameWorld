@@ -67,7 +67,7 @@ public class DialogManager : MonoBehaviour
         {
             string jsonData = File.ReadAllText(filePath);
             DialogData[] dialogDataArray = JsonHelper.FromJson<DialogData>(jsonData);
-            uiManager.SetDailog("촌장", dialogDataArray[VillageChiefProgress].dialogText);
+            uiManager.SetDailog(NPCManager.Instance.npcName[0], dialogDataArray[VillageChiefProgress].dialogText);
         }
         else
         {
@@ -101,7 +101,7 @@ public class DialogManager : MonoBehaviour
             }
             else
             {
-                uiManager.SetDailog("d",new string[] { "이 미니게임은 아직 진행되지 않았습니다." });
+                uiManager.SetDailog("0",new string[] { "이 미니게임은 아직 진행되지 않았습니다." });
             }
         }
         else
@@ -110,6 +110,11 @@ public class DialogManager : MonoBehaviour
         }
     }
 
+    public void DialogShopOut()
+    {
+        Debug.Log(NPCManager.Instance.npcName[5]);
+        uiManager.SetDailog(NPCManager.Instance.npcName[5],new string[] { "물건좀 보고가요" });
+    }
 
 
     // JSON 데이터를 다루는 유틸리티
