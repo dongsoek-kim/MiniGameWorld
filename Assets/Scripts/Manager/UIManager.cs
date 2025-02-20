@@ -48,6 +48,7 @@ public class UIManager : MonoBehaviour
     {
         ChangeState(UIState.Home);
         GameManager.Instance.player.enabled = true;
+        GameManager.Instance.npcHandler.enabled = true;
     }
     public void SetCostomazing()
     {

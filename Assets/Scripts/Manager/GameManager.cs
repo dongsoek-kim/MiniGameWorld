@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
     public int Coin { get; set; } = 1500;
     public Action<int> DialogFinished;
     public MainPlayerController player;
+    public NPCHandler npcHandler;
     public static GameManager Instance
     {
         get
@@ -45,6 +46,10 @@ public class GameManager : MonoBehaviour
         {
             player = FindObjectOfType<MainPlayerController>();
         }
+        if(npcHandler=null)
+        {
+            npcHandler = FindObjectOfType<NPCHandler>();
+        }
         dialogManager = FindObjectOfType<DialogManager>();
         miniGameManager = FindObjectOfType<MiniGameManager>();
         npcManager = FindObjectOfType<NPCManager>();
@@ -65,6 +70,7 @@ public class GameManager : MonoBehaviour
     }
     public void OnInteract(string npcName)
     {
+        GameManager.Instance.npcHandler.enabled = false;
         switch (npcName)
         {
             case "VillageChief":
@@ -180,6 +186,10 @@ public class GameManager : MonoBehaviour
         if (player == null)
         {
             player = FindObjectOfType<MainPlayerController>();
+        }
+        if(npcHandler   ==null)
+        {
+            npcHandler = FindObjectOfType<NPCHandler>();
         }
         player.SetPlayerTransform();
     }

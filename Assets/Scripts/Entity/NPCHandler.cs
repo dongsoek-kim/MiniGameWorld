@@ -40,14 +40,4 @@ public class NPCHandler : MonoBehaviour
             }
         }
     }
-    public void UnlockInput()
-    {
-        // 잠시 대기 후 입력 재활성화 (예: 0.2초)
-        StartCoroutine(ResetInput());
-    }
-    private IEnumerator ResetInput()
-    {
-        yield return new WaitForSeconds(0.2f);
-        canReceiveInput = true;
-    }
 }
