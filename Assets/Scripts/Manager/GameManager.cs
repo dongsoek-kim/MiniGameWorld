@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
     private NPCManager npcManager;
     private RockBoom rockBoom;
     public Transform storeTransform;
-    public int Coin { get; set; } = 1500;
+    public int Coin { get; set; } 
     public Action<int> DialogFinished;
     public MainPlayerController player;
     public NPCHandler npcHandler;
