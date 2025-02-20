@@ -44,7 +44,7 @@ public class RockBoom : MonoBehaviour
         float particleDuration = mainModule.duration + mainModule.startLifetime.constantMax;
 
         Destroy(rockExplosionInstance.gameObject, particleDuration);
-        Destroy(rock.gameObject, 2f);
+        rock.SetActive(false);
         yield return new WaitForSeconds(particleDuration);
         if (follow != null)
         {

@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+
 public class GameManager : MonoBehaviour
 {
     private static GameManager instance;
@@ -15,11 +16,13 @@ public class GameManager : MonoBehaviour
     private NPCManager npcManager;
     private RockBoom rockBoom;
     public Transform storeTransform;
-    public int Coin { get; set; } = 10;
+    public GameObject rock;
+    public int Coin { get; set; } = 1500;
     public Action<int> DialogFinished;
     public Player player;
     public NPCHandler npcHandler;
     public Customizer costomizer;
+    bool processrockBoom = false;
     public static GameManager Instance
     {
         get
@@ -40,6 +43,11 @@ public class GameManager : MonoBehaviour
     }
     void Awake()
     {
+
+        if(rock ==null)
+        {
+            rock = GameObject.Find("Rock");
+        }
         if (uiManager == null)
         {
             uiManager = FindObjectOfType<UIManager>();  // UIManager를 씬에서 찾음
@@ -69,6 +77,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+
     }
     public void OnInteract(string npcName)
     {
@@ -165,6 +174,7 @@ public class GameManager : MonoBehaviour
     {
         rockBoom = FindObjectOfType<RockBoom>();
         rockBoom.BoomStart();
+        processrockBoom = true;
     }
     public void MiniGameStart(string name)
     {
@@ -224,6 +234,14 @@ public class GameManager : MonoBehaviour
         if(npcHandler   ==null)
         {
             npcHandler = FindObjectOfType<NPCHandler>();
+        }
+        if (rock == null)
+        {
+            rock = GameObject.Find("Rock");
+        }
+        if (processrockBoom)
+        {
+            rock.SetActive(false);
         }
         player.SetPlayerTransform();
     }
